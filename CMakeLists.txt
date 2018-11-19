@@ -8,12 +8,19 @@ set(CMAKE_AUTOMOC ON)
 # Create a list with all source/header files
 set( project_sources
    SRC/main.cpp
+   SRC/Utility.cpp
    SRC/Reader.cpp
+   SRC/Searcher.cpp
+   SRC/FileManager.cpp
+   SRC/SearchingWord.cpp
 )
 
 set( project_headers
    HDR/Reader.h
    HDR/Utility.h
+   HDR/Searcher.h
+   HDR/FileManager.h
+   HDR/SearchingWord.h
 )
 
 # Create executable with all necessary source files
