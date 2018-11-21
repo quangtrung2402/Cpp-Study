@@ -2,6 +2,7 @@
 #include "HDR/Utility.h"
 
 FileManager::FileManager(int argc, char **argv):
+    mArgStatus(ARGUMENT_STATUS_T::ARGUMENT_ABNORMAL),
     mSearchPath(nullptr),
     mSearchWordList(nullptr),
     mFileList(nullptr)
@@ -28,10 +29,29 @@ FileManager::FileManager(int argc, char **argv):
     mArgStatus = ARGUMENT_STATUS_T::ARGUMENT_OK;
 }
 
+FileManager::~FileManager()
+{
+    if(mSearchPath){
+        mSearchPath->clear();
+        delete mSearchPath;
+        mSearchPath = nullptr;
+    }
+    if(mSearchWordList){
+        mSearchWordList->clear();
+        delete mSearchWordList;
+        mSearchWordList = nullptr;
+    }
+    if(mFileList){
+        mFileList->clear();
+        delete mFileList;
+        mFileList = nullptr;
+    }
+}
+
 int FileManager::run()
 {
-    cout << "Path: " << mArgStatus << endl;
     if(mArgStatus != ARGUMENT_STATUS_T::ARGUMENT_OK){
+        cout << "Argument state: " << mArgStatus << endl;
         return mArgStatus;
     } else {
         //TODO: Devide task to thread worker
@@ -43,8 +63,9 @@ int FileManager::run()
             }
         }
 
-        Searcher searcher = Searcher("example.txt", *mSearchWordList);
-        searcher.search();
+        Searcher searcher = Searcher("example.txt", *mSearchWordList, STR_REPORT_FILE_NAME);
+        bool result = searcher.search();
+        cout << "search result is " << (result? "true" : "false") << endl;
     }
     return ARGUMENT_STATUS_T::ARGUMENT_OK;
 }

@@ -12,7 +12,6 @@ set( project_sources
    SRC/Reader.cpp
    SRC/Searcher.cpp
    SRC/FileManager.cpp
-   SRC/SearchingWord.cpp
 )
 
 set( project_headers
@@ -20,7 +19,6 @@ set( project_headers
    HDR/Utility.h
    HDR/Searcher.h
    HDR/FileManager.h
-   HDR/SearchingWord.h
 )
 
 # Create executable with all necessary source files
